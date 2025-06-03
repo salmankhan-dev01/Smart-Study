@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -39,7 +40,7 @@ import com.example.smartstudy.presentation.component.SubjectCard
 @Composable
 fun DashboardScreen() {
 
-    val subject=listOf(
+    val subject = listOf(
         Subject(name = "English", getHours = 19f, colors = Subject.subjectCardColor[0]),
         Subject(name = "Math", getHours = 19f, colors = Subject.subjectCardColor[1]),
         Subject(name = "Physics", getHours = 19f, colors = Subject.subjectCardColor[2]),
@@ -67,7 +68,16 @@ fun DashboardScreen() {
             item {
                 SubjectCardSection(modifier = Modifier.fillMaxWidth(), subjectList = subject)
             }
-
+            item {
+                Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 48.dp, vertical = 20.dp)
+                ) {
+                    Text(text = "Start Study Session")
+                }
+            }
         }
     }
 }
@@ -149,9 +159,10 @@ private fun SubjectCardSection(
             )
         }
 
-        LazyRow (horizontalArrangement = Arrangement.spacedBy(12.dp),
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(start = 12.dp, end = 12.dp)
-        ){
+        ) {
             items(subjectList) { subject ->
                 SubjectCard(
                     subjectName = subject.name,
