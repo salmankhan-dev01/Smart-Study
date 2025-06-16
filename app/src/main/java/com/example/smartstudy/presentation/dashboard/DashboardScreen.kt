@@ -35,6 +35,7 @@ import androidx.room.util.TableInfo
 import com.example.smartstudy.domain.model.Subject
 import com.example.smartstudy.presentation.component.CountCard
 import com.example.smartstudy.R
+import com.example.smartstudy.domain.model.Task
 import com.example.smartstudy.presentation.component.SubjectCard
 import com.example.smartstudy.presentation.component.taskList
 
@@ -42,11 +43,24 @@ import com.example.smartstudy.presentation.component.taskList
 fun DashboardScreen() {
 
     val subject = listOf(
-        Subject(name = "English", getHours = 19f, colors = Subject.subjectCardColor[0]),
-        Subject(name = "Math", getHours = 19f, colors = Subject.subjectCardColor[1]),
-        Subject(name = "Physics", getHours = 19f, colors = Subject.subjectCardColor[2]),
-        Subject(name = "Compiler", getHours = 19f, colors = Subject.subjectCardColor[3]),
-        Subject(name = "Computer", getHours = 19f, colors = Subject.subjectCardColor[4]),
+        Subject(name = "English", getHours = 19f, colors = Subject.subjectCardColor[0], subjectId = 1),
+        Subject(name = "Math", getHours = 19f, colors = Subject.subjectCardColor[1], subjectId = 1),
+        Subject(name = "Physics", getHours = 19f, colors = Subject.subjectCardColor[2], subjectId = 1),
+        Subject(name = "Compiler", getHours = 19f, colors = Subject.subjectCardColor[3], subjectId = 1),
+        Subject(name = "Computer", getHours = 19f, colors = Subject.subjectCardColor[4], subjectId = 1),
+    )
+
+    val tasks=listOf(
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 0, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1),
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 1, relatedToSubject = "", isComplete = true, taskSubjectId = 0, taskId = 1),
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 2, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1),
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 1, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1),
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 1, relatedToSubject = "", isComplete = true, taskSubjectId = 0, taskId = 1),
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 0, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1),
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 1, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1),
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 2, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1),
+        Task(title = "Prepare note", description = "", dueDate = 0L, priority = 1, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1)
+
     )
 
     Scaffold(
@@ -82,7 +96,9 @@ fun DashboardScreen() {
                 this@LazyColumn.taskList(
                     sectionTitle = "UPCOMING TASKS",
                     emptyListText = "You don't have any subject.\n Click + button to add the task.",
-                    task = emptyList()
+                    tasks = tasks,
+                    onCheckBoxClick = {},
+                    onTaskCardClick = {}
                 )
             }
     }

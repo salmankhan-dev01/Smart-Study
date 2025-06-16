@@ -8,5 +8,7 @@ data class Task(
     val dueDate: Long,
     val priority: Int,
     val relatedToSubject: String,
-    val isComplete: String
+    val isComplete: Boolean,
+    val taskSubjectId: Int,
+    val taskId: Int
 )
