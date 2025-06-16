@@ -36,6 +36,7 @@ import com.example.smartstudy.domain.model.Subject
 import com.example.smartstudy.presentation.component.CountCard
 import com.example.smartstudy.R
 import com.example.smartstudy.presentation.component.SubjectCard
+import com.example.smartstudy.presentation.component.taskList
 
 @Composable
 fun DashboardScreen() {
@@ -78,7 +79,12 @@ fun DashboardScreen() {
                     Text(text = "Start Study Session")
                 }
             }
-        }
+                this@LazyColumn.taskList(
+                    sectionTitle = "UPCOMING TASKS",
+                    emptyListText = "You don't have any subject.\n Click + button to add the task.",
+                    task = emptyList()
+                )
+            }
     }
 }
 
