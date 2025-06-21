@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -35,8 +36,10 @@ import androidx.room.util.TableInfo
 import com.example.smartstudy.domain.model.Subject
 import com.example.smartstudy.presentation.component.CountCard
 import com.example.smartstudy.R
+import com.example.smartstudy.domain.model.Session
 import com.example.smartstudy.domain.model.Task
 import com.example.smartstudy.presentation.component.SubjectCard
+import com.example.smartstudy.presentation.component.studySessionList
 import com.example.smartstudy.presentation.component.taskList
 
 @Composable
@@ -61,6 +64,15 @@ fun DashboardScreen() {
         Task(title = "Prepare note", description = "", dueDate = 0L, priority = 2, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1),
         Task(title = "Prepare note", description = "", dueDate = 0L, priority = 1, relatedToSubject = "", isComplete = false, taskSubjectId = 0, taskId = 1)
 
+    )
+
+    val sessions=listOf(
+        Session( sessionId = 0, date = 0L, duration = 2L, sessionSubjectId = 0, relatedToSubject = "Hindi"),
+        Session( sessionId = 0, date = 0L, duration = 2L, sessionSubjectId = 0, relatedToSubject = "English"),
+        Session( sessionId = 0, date = 0L, duration = 2L, sessionSubjectId = 0, relatedToSubject = "Web tech"),
+        Session( sessionId = 0, date = 0L, duration = 2L, sessionSubjectId = 0, relatedToSubject = "Compiler"),
+        Session( sessionId = 0, date = 0L, duration = 2L, sessionSubjectId = 0, relatedToSubject = "Hadoop"),
+        Session( sessionId = 0, date = 0L, duration = 2L, sessionSubjectId = 0, relatedToSubject = "Automata")
     )
 
     Scaffold(
@@ -100,6 +112,13 @@ fun DashboardScreen() {
                     onCheckBoxClick = {},
                     onTaskCardClick = {}
                 )
+            item { Spacer(modifier = Modifier.height(20.dp)) }
+            studySessionList(
+                sectionTitle = "RECENT STUDY SESSIONS",
+                emptyListText = "You don't have any subject.\n Click + button to add the task.",
+                sessions = sessions,
+                onDeleteIconClick = {}
+            )
             }
     }
 }
