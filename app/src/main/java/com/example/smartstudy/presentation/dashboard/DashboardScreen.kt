@@ -26,6 +26,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,6 +42,7 @@ import com.example.smartstudy.presentation.component.CountCard
 import com.example.smartstudy.R
 import com.example.smartstudy.domain.model.Session
 import com.example.smartstudy.domain.model.Task
+import com.example.smartstudy.presentation.component.AddSubjectDialog
 import com.example.smartstudy.presentation.component.SubjectCard
 import com.example.smartstudy.presentation.component.studySessionList
 import com.example.smartstudy.presentation.component.taskList
@@ -75,6 +80,14 @@ fun DashboardScreen() {
         Session( sessionId = 0, date = 0L, duration = 2L, sessionSubjectId = 0, relatedToSubject = "Automata")
     )
 
+    var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
+
+    AddSubjectDialog(
+        isOpen =isAddSubjectDialogOpen,
+        onDismissRequest ={isAddSubjectDialogOpen=false},
+        onConfirmButtonClick ={isAddSubjectDialogOpen=false}
+    )
+
     Scaffold(
         topBar = { DashboardScreenTopBar() }
     ) { paddingValues ->
@@ -93,7 +106,10 @@ fun DashboardScreen() {
                 )
             }
             item {
-                SubjectCardSection(modifier = Modifier.fillMaxWidth(), subjectList = subject)
+                SubjectCardSection(modifier = Modifier.fillMaxWidth(),
+                    subjectList = subject,
+                    onAddIconClicked = {isAddSubjectDialogOpen=true}
+                    )
             }
             item {
                 Button(
@@ -170,6 +186,7 @@ private fun SubjectCardSection(
     modifier: Modifier = Modifier,
     subjectList: List<Subject>,
     emptySubject: String = "You don't have any subject.\n Click + button to add the subject.",
+    onAddIconClicked:()-> Unit
 ) {
     Column(modifier = modifier) {
         Row(
@@ -180,7 +197,7 @@ private fun SubjectCardSection(
                 text = "Subject", style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(start = 12.dp)
             )
-            IconButton(onClick = {}) {
+            IconButton(onClick = onAddIconClicked) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add subject")
             }
         }
