@@ -44,6 +44,7 @@ import com.example.smartstudy.R
 import com.example.smartstudy.domain.model.Session
 import com.example.smartstudy.domain.model.Task
 import com.example.smartstudy.presentation.component.AddSubjectDialog
+import com.example.smartstudy.presentation.component.DeleteDialog
 import com.example.smartstudy.presentation.component.SubjectCard
 import com.example.smartstudy.presentation.component.studySessionList
 import com.example.smartstudy.presentation.component.taskList
@@ -82,6 +83,7 @@ fun DashboardScreen() {
     )
 
     var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
+    var isDeleteSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
     var subjectName by remember { mutableStateOf("") }
     var goalHours by remember { mutableStateOf("") }
     var selectedColor by remember { mutableStateOf(Subject.subjectCardColor.random()) }
@@ -96,6 +98,14 @@ fun DashboardScreen() {
         onSubjectNameChange = { subjectName=it },
         onGoalHoursChange = {goalHours=it},
         onColorChange = {selectedColor=it}
+    )
+
+    DeleteDialog(
+        isOpen = isDeleteSubjectDialogOpen,
+        title = "Delete session?",
+        bodyText = "Are you sure,You want to delete this session? Your studied hours will be reduced by this session time. This action can't be undo",
+        onDismissRequest = {isDeleteSubjectDialogOpen=false},
+        onConfirmButtonClick = {  isDeleteSubjectDialogOpen=false}
     )
 
     Scaffold(
@@ -143,7 +153,7 @@ fun DashboardScreen() {
                 sectionTitle = "RECENT STUDY SESSIONS",
                 emptyListText = "You don't have any subject.\n Click + button to add the task.",
                 sessions = sessions,
-                onDeleteIconClick = {}
+                onDeleteIconClick = { isDeleteSubjectDialogOpen=true}
             )
             }
     }
