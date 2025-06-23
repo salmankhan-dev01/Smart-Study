@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -81,11 +82,20 @@ fun DashboardScreen() {
     )
 
     var isAddSubjectDialogOpen by rememberSaveable { mutableStateOf(false) }
+    var subjectName by remember { mutableStateOf("") }
+    var goalHours by remember { mutableStateOf("") }
+    var selectedColor by remember { mutableStateOf(Subject.subjectCardColor.random()) }
 
     AddSubjectDialog(
-        isOpen =isAddSubjectDialogOpen,
-        onDismissRequest ={isAddSubjectDialogOpen=false},
-        onConfirmButtonClick ={isAddSubjectDialogOpen=false}
+        isOpen = isAddSubjectDialogOpen,
+        onDismissRequest = { isAddSubjectDialogOpen = false },
+        onConfirmButtonClick = { isAddSubjectDialogOpen = false },
+        subjectName = subjectName,
+        goalHours = goalHours,
+        selectedColors =selectedColor,
+        onSubjectNameChange = { subjectName=it },
+        onGoalHoursChange = {goalHours=it},
+        onColorChange = {selectedColor=it}
     )
 
     Scaffold(
