@@ -9,13 +9,14 @@ import com.example.smartstudy.domain.model.Subject
 import com.example.smartstudy.domain.model.Task
 import com.example.smartstudy.presentation.dashboard.DashboardScreen
 import com.example.smartstudy.presentation.subject.SubjectScreen
+import com.example.smartstudy.presentation.task.TaskScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SubjectScreen()
+            TaskScreen()
         }
     }
 }
