@@ -8,6 +8,7 @@ import com.example.smartstudy.domain.model.Session
 import com.example.smartstudy.domain.model.Subject
 import com.example.smartstudy.domain.model.Task
 import com.example.smartstudy.presentation.dashboard.DashboardScreen
+import com.example.smartstudy.presentation.session.SessionScreen
 import com.example.smartstudy.presentation.subject.SubjectScreen
 import com.example.smartstudy.presentation.task.TaskScreen
 
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            TaskScreen()
+            SessionScreen()
         }
     }
 }
